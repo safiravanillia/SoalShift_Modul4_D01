@@ -60,7 +60,13 @@ static int xmp_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 
 static int xmp_rename (const char *asal, const char *tujuan)
 {
+	int res;
 
+	res = rename(asal, tujuan);
+	if (res == -1)
+		return -errno;
+
+	return 0;
 };
 
 static struct fuse_operations xmp_oper = {

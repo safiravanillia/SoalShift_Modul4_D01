@@ -58,14 +58,29 @@ static int xmp_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 	return 0;
 }
 
-static int xmp_open (const char *, struct fuse_file_info *)
+static int xmp_open (const char *path, struct fuse_file_info *fi)
 {
+	int res;
+	char fpath[1000];
 
+
+	res = open(fpath, fi->flags);
+	if (res == -1)
+		return -errno;
+
+	close(res);
+	return 0;
 };
 
-static int xmp_rename (const char *lama, const char *baru)
+static int xmp_rename (const char *asal, const char *tujuan)
 {
+	int res;
 
+	res = rename(asal, tujuan);
+	if (res == -1)
+		return -errno;
+
+	return 0;
 };
 
 static struct fuse_operations xmp_oper = {

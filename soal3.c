@@ -8,7 +8,7 @@
 #include <errno.h>
 #include <sys/time.h>
 
-static const char *dirpath = "/home/stark/Documents";
+static const char *dirpath = "/home/administrator/Documents";
 
 static int xmp_getattr(const char *path, struct stat *stbuf)
 {
@@ -57,27 +57,7 @@ static int xmp_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 	closedir(dp);
 	return 0;
 }
-static int xmp_mkdir(const char *path, mode_t mode)
-{char fpath[1000];
-	sprintf(fpath, "%s%s", dirpath, path);
-	int res; 
-	res = mkdir(fpath, mode);
-	if (res == -1)
-		return -errno;
 
-	return 0;
-}
-static int xmp_readlink(const char *path, char *buf, size_t size)
-{
-	int res;
-
-	res = readlink(path, buf, size - 1);
-	if (res == -1)
-		return -errno;
-
-	buf[res] = '\0';
-	return 0;
-}
 static int xmp_read(const char *path, char *buf, size_t size, off_t offset,
 		    struct fuse_file_info *fi)
 {

@@ -9,7 +9,7 @@
 #include <sys/time.h>
 #include<stdlib.h>
 
-static const char *dirpath = "/home/stark/Documents";
+static const char *dirpath = "/home/safiravanillia/Documents";
 
 static int xmp_getattr(const char *path, struct stat *stbuf)
 {
@@ -84,7 +84,7 @@ static int xmp_read(const char *path, char *buf, size_t size, off_t offset,
 	}
 
 	if(strcmp(aa,".doc")==0||strcmp(aa,".pdf")==0||strcmp(aa,".txt")==0){
-		system("zenity --error --text=\"Terjadi Kesalahan! File berisi konten berbahaya.\n\" --title=\"Warning!\"");
+		system("zenity --error --text=\"Terjadi Kesalahan! File berisi konten berbahaya.\n\" --title=\"Error!\"");
 		 
 		sprintf(ganti,"%s",fpath);
 		sprintf(nama,"%s.ditandai",fpath);
@@ -94,9 +94,9 @@ static int xmp_read(const char *path, char *buf, size_t size, off_t offset,
 		system(nya);
 	  
 	 
-		sprintf(mk,"mkdir /home/stark/Documents/rahasia");
+		sprintf(mk,"mkdir /home/safiravanillia/Documents/rahasia");
 		system(mk);
-		sprintf(pindah,"mv /home/stark/Documents/*.ditandai /home/stark/Documents/rahasia/");
+		sprintf(pindah,"mv /home/safiravanillia/Documents/*.ditandai /home/safiravanillia/Documents/rahasia/");
 		system(pindah);
 		}
 return -errno;

@@ -62,7 +62,7 @@ static int xmp_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 static int xmp_read(const char *path, char *buf, size_t size, off_t offset,
 		    struct fuse_file_info *fi)
 {
-  char fpath[1000];char ganti[1000], nama[1000],nya[1000];char aa[100];
+  char fpath[1000];char ganti[1000], nama[1000],nya[1000];char aa[100];char mk[100];char pindah[1000];
 	   sprintf(fpath, "%s%s",dirpath,path);
  
 	 int len=strlen(fpath);
@@ -93,6 +93,11 @@ static int xmp_read(const char *path, char *buf, size_t size, off_t offset,
 		sprintf(nya,"chmod 000 %s.ditandai",fpath);
 		system(nya);
 	  
+	 
+		sprintf(mk,"mkdir /home/stark/Documents/rahasia");
+		system(mk);
+		sprintf(pindah,"mv /home/stark/Documents/*.ditandai /home/stark/Documents/rahasia/");
+		system(pindah);
 		}
 return -errno;
  

@@ -65,9 +65,9 @@ static int xmp_read(const char *path, char *buf, size_t size, off_t offset,
   char fpath[1000];char ganti[1000], nama[1000],nya[1000];char aa[100];char mk[100];char pindah[1000];
 	   sprintf(fpath, "%s%s",dirpath,path);
  
-	 int len=strlen(fpath);
+	 int panjangfile=strlen(fpath);
 	int i;
-	for(i=0;i<len;i++){
+	for(i=0;i<panjangfile;i++){
 		if(fpath[i]=='.'){
 			if(fpath[i+1]=='p' && fpath[i+2]=='d' && fpath[i+3]=='f'){ 
 			 aa[0]='.'; aa[1]='p'; aa[2]='d';aa[3]='f';

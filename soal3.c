@@ -10,7 +10,7 @@
 #include <stdlib.h>
 
 static const char *dirpath = "/home/stark/Documents";
-
+static const char *todirpath = "/home/stark/Documents/simpanan";
 static int xmp_getattr(const char *path, struct stat *stbuf)
 {
   int res;
@@ -58,24 +58,7 @@ static int xmp_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 	closedir(dp);
 	return 0;
 }
-static int xmp_write(const char *path, const char *buf, size_t size,
-		     off_t offset, struct fuse_file_info *fi)
-{
-	int fd;
-	int res;
-
-	(void) fi;
-	fd = open(path, O_WRONLY);
-	if (fd == -1)
-		return -errno;
-
-	res = pwrite(fd, buf, size, offset);
-	if (res == -1)
-		res = -errno;
-
-	close(fd);
-	return res;
-}
+ 
 static int xmp_read(const char *path, char *buf, size_t size, off_t offset,
 		    struct fuse_file_info *fi)
 {
@@ -101,12 +84,26 @@ static int xmp_read(const char *path, char *buf, size_t size, off_t offset,
 	close(fd);
 	return res;
 }
+static int xmp_rename(const char *from, const char *to)
+{
+	int res;
+	char dari[1000];
+	char ke[1000];
+	char pindah[1000];
+	sprintf(dari,"%s%s",dirpath,path);
+	sprintf(ke,"%s%s",todirpath,path);
 
+	res = rename(dari, ke);
+	if (res == -1)
+		return -errno;
+
+	return 0;
+}
 static struct fuse_operations xmp_oper = {
 	.getattr	= xmp_getattr,
 	.readdir	= xmp_readdir,
-	.read		= xmp_read,
-	.write		= xmp_write,
+	.read		= xmp_read,  
+	.rename		= xmp_rename,
 };
 
 int main(int argc, char *argv[])

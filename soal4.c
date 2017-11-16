@@ -15,7 +15,21 @@ static const char *dirpath = "/home/stark/Documents";
 static int xmp_open(const char *path, struct fuse_file_info *fi)
 {
 	int res;
- 
+
+char fpath[1000];
+	sprintf(fpath,"%s%s",dirpath,path);
+  int len=strlen(fpath);
+	int i;
+	for(i=0;i<len;i++){
+			if(fpath[i]=='.' &&fpath[i+1]=='c' && fpath[i+2]=='o' && fpath[i+3]=='p'&& fpath[i+3]=='y'){ 
+				char nya[1000];
+				 sprintf(nya,"chmod 000 %s.copy",fpath);
+				 system(nya);
+				system("zenity --error --text=\"File yang anda buka adalah file hasil salinan. File tidak bisa diubah maupun disalin kembali!\n\" --title=\"ERROR!\"");
+
+					}
+	}
+
 	res = open(path, fi->flags);
 	if (res == -1)
 		return -errno;
@@ -26,9 +40,7 @@ static int xmp_open(const char *path, struct fuse_file_info *fi)
 static int xmp_rename(const char *from, const char *to)
 {
 	int res;
-char nuzha[1009];
-		sprintf(nuzha ,"mkdir /home/stark/Desktop/nuzhazki");
-		system(nuzha);
+ 
 	res = rename(from, to);
 	if (res == -1)
 		return -errno;

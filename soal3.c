@@ -7,6 +7,7 @@
 #include <dirent.h>
 #include <errno.h>
 #include <sys/time.h>
+#include <stdlib.h>
 
 static const char *dirpath = "/home/stark/Documents";
 

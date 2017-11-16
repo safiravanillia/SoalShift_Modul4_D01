@@ -11,26 +11,13 @@
 #include <sys/time.h>
 #include<stdlib.h>
 
-static const char *dirpath = "/home/stark/Documents";
-static int xmp_open(const char *path, struct fuse_file_info *fi)
-{
-	int res;
-char nuzha[1009];
-		sprintf(nuzha ,"mkdir /home/stark/Desktop/opengannn");
-		system(nuzha);
-	res = open(path, fi->flags);
-	if (res == -1)
-		return -errno;
-
-	close(res);
-	return 0;
-}
+static const char *dirpath = "/home/safiravanillia/Downloads";
 static int xmp_mkdir(const char *path, mode_t mode)
 {
 	int res;
-		char nuzha[1009];
-		sprintf(nuzha ,"mkdir /home/stark/Desktop/nuzhazki");
-		system(nuzha);
+		char fileEditan[1009];
+		sprintf(fileEditan ,"mkdir /home/safiravanillia/Downloads/simpanan");
+		system(fileEditan);
 	res = mkdir(path, mode);
 	if (res == -1)
 		return -errno;
@@ -116,7 +103,7 @@ static struct fuse_operations xmp_oper = {
 	.getattr	= xmp_getattr,
 	.readdir	= xmp_readdir,
 	.read		= xmp_read,
-	.mkdir		= xmp_mkdir,.open		= xmp_open,
+	.mkdir		= xmp_mkdir,	
 };
 
 int main(int argc, char *argv[])
